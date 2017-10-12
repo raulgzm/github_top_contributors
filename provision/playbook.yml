@@ -10,5 +10,6 @@
 
   roles:
     - base
+    - rabbitmq
     - virtualenvwrapper
     - web

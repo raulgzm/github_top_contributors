@@ -1,0 +1,3 @@
+rabbitmq_vhost: "vanellope_vhost"
+rabbitmq_user: "vanellope"
+rabbitmq_user_password: "vanellope"

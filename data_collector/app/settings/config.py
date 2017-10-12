@@ -33,3 +33,7 @@ LOCATIONS_ENABLED = [
 	'madrid',
 	'valencia',
 ]
+
+# ElasticSearch
+ELASTICSEARCH_HOST = 'localhost'
+ELASTICSEARCH_PORT = '9200'

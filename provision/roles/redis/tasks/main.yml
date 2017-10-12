@@ -1,0 +1,26 @@
+- name: Adding apt repository
+  apt_repository:
+    repo: "{{ redis_repository }}"
+    update_cache: yes
+
+- name: Installing Redis packages
+  apt:
+    pkg: "{{ redis_package }}"
+    state: present
+
+- name: Configuring Redis
+  template:
+    src: "redis.conf.j2"
+    dest: "/etc/redis/redis.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart redis-server
+  with_items:
+    - "redis.conf"
+
+- name: Configuring service
+  service:
+    name: redis-server
+    state: "{{ redis_service_state }}"
+    enabled: "{{ redis_service_enabled }}"

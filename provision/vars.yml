@@ -2,6 +2,9 @@ project_name: github_top_contributors
 application_name: github_top_contributors
 virtualenv_name: github_top_contributors
 
+site: github_top_contributors
+application_port: 8000
+
 # Application settings.
 root_path: "/vagrant"
 virtualenv_root_path: "{{ root_path }}/.virtualenvs"

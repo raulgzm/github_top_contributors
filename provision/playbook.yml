@@ -13,3 +13,4 @@
     - rabbitmq
     - virtualenvwrapper
     - web
+    - nginx

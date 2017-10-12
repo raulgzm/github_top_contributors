@@ -20,7 +20,7 @@ class UserModelTestSuite(unittest.TestCase):
 	def test_create_user(self):
 		user = create_user_mock()
 		self.assertIsInstance(user, User)
-		self.assertEqual(user.id, USER_ID_MOCK)
+		self.assertEqual(user.user_id, USER_ID_MOCK)
 		self.assertEqual(user.username, USERNAME_MOCK)
 		self.assertEqual(user.location, LOCATION_MOCK)
 		self.assertEqual(user.contributions, CONTRIBUTIONS_MOCK)

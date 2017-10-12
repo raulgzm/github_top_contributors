@@ -22,3 +22,14 @@ CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
 SECRET_KEY = "secret"
+
+# Github Account
+GITHUB_CLIENT_ID = '85d04bcdbc3a0b8fb001'
+GITHUB_CLIENT_SECRET = 'd539db588d3df8955342911322a962edb7de0f27'
+
+# Location Enabled
+LOCATIONS_ENABLED = [
+	'barcelona',
+	'madrid',
+	'valencia',
+]

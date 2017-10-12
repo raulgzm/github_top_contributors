@@ -37,3 +37,7 @@
 - pip:
     name: pip
     extra_args: --upgrade
+
+- apt_repository:
+    repo: "ppa:openjdk-r/ppa"
+    state: present

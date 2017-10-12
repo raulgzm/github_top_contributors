@@ -13,4 +13,5 @@
     - rabbitmq
     - virtualenvwrapper
     - web
+    - elasticsearch
     - nginx

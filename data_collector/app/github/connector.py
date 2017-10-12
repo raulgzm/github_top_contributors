@@ -13,6 +13,8 @@ class GithubConnSingleton(object):
 
 	def __new__(self):
 		if not self.__instance:
-			self.__instance = Github(client_id=GITHUB_CLIENT_ID, client_secret=GITHUB_CLIENT_SECRET)
+			self.__instance = Github(
+				client_id=GITHUB_CLIENT_ID, 
+				client_secret=GITHUB_CLIENT_SECRET
+			)
 		return self.__instance
-	

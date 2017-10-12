@@ -6,20 +6,24 @@ import unittest
 
 # Apps Imports
 from app.users.user import User
+from app.users.tests.mocks import (
+	create_user_mock,
+	USER_ID_MOCK,
+	USERNAME_MOCK,
+	LOCATION_MOCK,
+	CONTRIBUTIONS_MOCK,
+)
 
 
 class UserModelTestSuite(unittest.TestCase):
 
-	def setUp(self):
-		pass
-
 	def test_create_user(self):
-		user = User(user_id=1, username='haku', location='barcelona', contributions=0)
+		user = create_user_mock()
 		self.assertIsInstance(user, User)
-		self.assertEqual(user.id, 1)
-		self.assertEqual(user.username, 'haku')
-		self.assertEqual(user.location, 'barcelona')
-		self.assertEqual(user.contributions, 0)
+		self.assertEqual(user.id, USER_ID_MOCK)
+		self.assertEqual(user.username, USERNAME_MOCK)
+		self.assertEqual(user.location, LOCATION_MOCK)
+		self.assertEqual(user.contributions, CONTRIBUTIONS_MOCK)
 
 if __name__ == '__main__':
     unittest.main()

@@ -22,7 +22,3 @@ CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
 SECRET_KEY = "secret"
-
-# DATABASE
-SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/mercadona_db'
-SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'db_repository')

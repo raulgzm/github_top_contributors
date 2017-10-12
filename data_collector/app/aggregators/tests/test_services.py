@@ -4,9 +4,9 @@ import unittest
 
 # Third-Party imports
 import mock
-from github.NamedUser import NamedUser
 # Apps Imports
 from app.aggregators.services import AggregatorServices
+from app.users.user import User
 
 
 class AggregatorsServicesTestSuite(unittest.TestCase):
@@ -16,7 +16,7 @@ class AggregatorsServicesTestSuite(unittest.TestCase):
 
 	def test_get_github_users_by_location(self):
 		user_generator = self.aggregator.get_github_users_by_location(location='barcelona')
-		self.assertIsInstance(next(user_generator), NamedUser)
+		self.assertIsInstance(next(user_generator), User)
 
 	def test_get_github_users_by_location_stop_iteration(self):
 		with mock.patch('app.aggregators.services.AggregatorServices.get_github_users_by_location') as mock_get:

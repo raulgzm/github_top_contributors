@@ -6,7 +6,7 @@
 
 # Apps Imports
 
-class IndexerServices(object):
+class ElasticSearchIndexerServices(object):
 
 	@classmethod
 	def index_user_in_elasticsearch(cls, user):

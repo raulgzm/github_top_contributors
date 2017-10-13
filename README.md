@@ -39,7 +39,7 @@ In [2]: celery.send_task("run_github_users_aggregator")
 
 ## Run Backend API Server
 
-Now you can go in project root (/vagrant/backend_api) and run server:
+Now you can go to the Backen API project root (/vagrant/backend_api) and run server:
 
 ```
 workon github_top_contributors

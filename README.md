@@ -55,7 +55,7 @@ This should give you something like this:
 ```
 
 ## Test API
-Now you open your web-browser at:
+Now you can open your web-browser at:
 
 ```
 http://172.16.1.10/api/v1_0/search/?location=barcelona&page_size=50

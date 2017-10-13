@@ -23,6 +23,14 @@ class AggregatorServices(object):
 		)
 
 	@classmethod
+	def build_user_document(cls, github_user):
+		user = cls.create_user_from_github_user_class(github_user=github_user)
+		return ElasticSearchIndexerServices.make_index_document(
+			user_id=user.user_id,
+			user_serializer_data=UserSerializer(user).data
+		)
+
+	@classmethod
 	def get_github_users_by_location(cls, location):
 		try:
 			github_handler = GithubConnSingleton()
@@ -31,14 +39,13 @@ class AggregatorServices(object):
 				**{'location': location}
 			)
 			for github_user in github_users_paginated_list:
-				yield cls.create_user_from_github_user_class(github_user=github_user)
+				yield cls.build_user_document(github_user=github_user)
 		except RateLimitExceededException:
 			raise StopIteration()
 
 	@classmethod
 	def run_github_aggregator(cls, location):
-		for user in cls.get_github_users_by_location(location=location):
-			ElasticSearchIndexerServices.index_user_in_elasticsearch(
-				user_id=user.user_id,
-				user_serializer_data=UserSerializer(user).data
-			)
+		ElasticSearchIndexerServices.index_users_in_bulk(
+			user_documents=cls.get_github_users_by_location(location='barcelona')
+		)
+

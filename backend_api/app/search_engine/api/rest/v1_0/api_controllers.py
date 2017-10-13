@@ -5,6 +5,7 @@
 # Third-Party imports
 from flask_restful import Resource, reqparse
 # Apps Imports
+from app.search_engine.services import SearchEngineServices
 
 class SearchEngineSearchAPIController(Resource):
 
@@ -26,4 +27,8 @@ class SearchEngineSearchAPIController(Resource):
     def get(self):
         page_size = self.get_page_size()
         location = self.get_location_query()
+        SearchEngineServices.search_github_users_in_elasticsearch(
+            page_size=page_size,
+            location=location
+        )
         return {'hello': 'world {} - {}'.format(location, page_size)}

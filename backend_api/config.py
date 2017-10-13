@@ -23,6 +23,8 @@ CSRF_SESSION_KEY = "secret"
 # Secret key for signing cookies
 SECRET_KEY = "secret"
 
-# DATABASE
-SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/mercadona_db'
-SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'db_repository')
+# ElasticSearch
+ELASTICSEARCH_HOST = 'localhost'
+ELASTICSEARCH_PORT = '9200'
+ELASTICSEARCH_INDEX_NAME = 'github_users'
+ELASTICSEARCH_DOC_TYPE = 'user'

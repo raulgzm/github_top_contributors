@@ -15,6 +15,13 @@ class SearchEngineServices(object):
 		 elastic_search_handler = ElasticSearchHandler()
 		 results = elastic_search_handler.client.search(
 		 	index=elastic_search_handler.index_name, 
-		 	body={"size": page_size, "query": {"match": {"location": {"query": location, "type": "phrase"}}}}
+		 	body={
+		 		"size": page_size, 
+		 		"query": {"match": {"location": {"query": location, "type": "phrase"}}},
+		 		"sort": [
+		 			{ "contributions" : {"order" : "desc"}},
+		 			{ "repositories" : {"order" : "desc"}},
+		 		]
+		 	}
 		 )
 		 return results['hits']['total'], results['hits']['hits']

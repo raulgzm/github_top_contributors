@@ -19,7 +19,8 @@ class AggregatorServices(object):
 			user_id=github_user.id,
 			username=github_user.name,
 			location=github_user.location,
-			contributions=0
+			contributions=0,
+			repositories=github_user.public_repos,
 		)
 
 	@classmethod

@@ -5,7 +5,7 @@
 # Third-Party imports
 
 # Apps Imports
-from app import app
+from backend_api_app import app
 
 if __name__ == "__main__":
 	app.run(

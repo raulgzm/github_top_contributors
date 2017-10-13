@@ -5,7 +5,7 @@
 # Third-Party imports
 
 # Apps Imports
-from app.search_engine.elasticsearch_client import ElasticSearchHandler
+from backend_api_app.search_engine.elasticsearch_client import ElasticSearchHandler
 
 
 class SearchEngineServices(object):

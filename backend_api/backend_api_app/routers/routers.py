@@ -5,7 +5,7 @@
 # Third-Party imports
 
 # Apps Imports
-from app.search_engine.api.rest.v1_0.api_routers import SearchEngineRouter
+from backend_api_app.search_engine.api.rest.v1_0.api_routers import SearchEngineRouter
 
 
 class Router(object):

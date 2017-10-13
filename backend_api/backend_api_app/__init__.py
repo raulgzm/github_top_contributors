@@ -5,7 +5,7 @@ from flask import Flask
 # Third-Party imports
 from flask_restful import Api
 # Apps Imports
-from app.routers.routers import Router
+from backend_api_app.routers.routers import Router
 
 app = Flask(__name__)
 app.config.from_object('config')

@@ -6,8 +6,8 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
 # Apps Imports
-from app.search_engine.services import SearchEngineServices
-from app.search_engine.api.rest.v1_0.api_serializers import GithubUserSerializer
+from backend_api_app.search_engine.services import SearchEngineServices
+from backend_api_app.search_engine.api.rest.v1_0.api_serializers import GithubUserSerializer
 
 class SearchEngineSearchAPIController(Resource):
 

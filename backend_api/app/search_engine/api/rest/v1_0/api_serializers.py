@@ -21,7 +21,12 @@ class GithubUserSerializer(object):
 		self.results = []
 		for hit in self.hits:
 			self.results.append({
-				'username': hit['_source']['username']
+				'username': hit['_source']['username'],
+				'user_id': hit['_source']['user_id'],
+				'repositories': hit['_source']['repositories'],
+				'location': hit['_source']['location'],
+				'user_profile_page': hit['_source']['user_profile_page'],
+				'contributions': hit['_source']['contributions'],
 			})
 		return self.results
 

@@ -98,8 +98,7 @@ class GithubProfileScrapperTestSuite(unittest.TestCase):
 		self.assertEqual(contributions, 10)
 
 	@mock.patch('requests.get')
-	def test_get_user_contributions_empty_response
-	(self, mock_get):
+	def test_get_user_contributions_empty_response(self, mock_get):
 		mock_response = mock.Mock()
 		mock_response.status_code = 200
 		mock_response.text = ""	

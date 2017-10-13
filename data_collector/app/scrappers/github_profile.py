@@ -37,5 +37,7 @@ class GithubProfileScrapper(object):
 		response = cls.read_profile_page(user_profile_page)
 		contributions = cls.find_contribution_element(html_response=response)
 		if contributions:
-			return [int(s) for s in contributions.split() if s.isdigit()][0]
+			number_of_contributions = [int(s) for s in contributions.split() if s.isdigit()]
+			if number_of_contributions:
+				return number_of_contributions[0]
 		return 0

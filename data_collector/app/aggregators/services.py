@@ -9,6 +9,8 @@ from app.github.connector import GithubConnSingleton
 from app.users.user import User
 from app.users.serializers import UserSerializer
 from app.indexers.elasticsearch_indexer_services import ElasticSearchIndexerServices
+from app.scrappers.github_profile import GithubProfileScrapper
+from app import celery
 
 
 class AggregatorServices(object):
@@ -21,6 +23,7 @@ class AggregatorServices(object):
 			location=github_user.location,
 			contributions=0,
 			repositories=github_user.public_repos,
+			user_profile_page=github_user.html_url
 		)
 
 	@classmethod
@@ -40,13 +43,29 @@ class AggregatorServices(object):
 				**{'location': location}
 			)
 			for github_user in github_users_paginated_list:
-				yield cls.build_user_document(github_user=github_user)
+				yield cls.create_user_from_github_user_class(github_user=github_user)
 		except RateLimitExceededException:
 			raise StopIteration()
 
 	@classmethod
 	def run_github_aggregator(cls, location):
-		ElasticSearchIndexerServices.index_users_in_bulk(
-			user_documents=cls.get_github_users_by_location(location='barcelona')
-		)
+		for user in cls.get_github_users_by_location(location=location):
+			ElasticSearchIndexerServices.index_user_in_elasticsearch(
+				user_id=user.user_id,
+				user_serializer_data=UserSerializer(user).data
+			)
+			celery.send_task(
+				"index_user_contributions", 
+				[user.user_id, user.user_profile_page, UserSerializer(user).data]
+			)
 
+	@classmethod
+	def index_user_contributions(cls, user_id, user_profile_page, user_serializer_data):
+		contributions = GithubProfileScrapper.get_user_contributions(
+			user_profile_page=user_profile_page
+		)
+		user_serializer_data['contributions'] = contributions
+		ElasticSearchIndexerServices.index_user_in_elasticsearch(
+			user_id=user_id,
+			user_serializer_data=user_serializer_data
+		)

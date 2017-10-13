@@ -9,18 +9,20 @@ from elasticsearch import Elasticsearch
 from backend_api_app.search_engine.tests.mocks import (
 	ELASTICSEARCH_RESULT_RESPONSE,
 )
+from backend_api_app.search_engine.services import SearchEngineServices
 
 
 class SearchEngineServicesTestSuite(unittest.TestCase):
 
 	@mock.patch('elasticsearch.Elasticsearch.search')
 	def test_search_github_users_in_elasticsearch(self, mock_get):
-		mock_response = mock.Mock()
-		mock_response.status_code = 200
-		mock_response.text = ELASTICSEARCH_RESULT_RESPONSE	
-		mock_get.return_value = mock_response
-		assert False, mock_get
-
+		mock_get.return_value = ELASTICSEARCH_RESULT_RESPONSE
+		total, hits = SearchEngineServices.search_github_users_in_elasticsearch(
+			location='barcelona',
+			page_size=5
+		)
+		self.assertEqual(total, 1021)
+		self.assertEqual(len(hits), 5)
 
 if __name__ == '__main__':
     unittest.main()

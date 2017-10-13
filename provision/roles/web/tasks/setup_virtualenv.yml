@@ -18,3 +18,8 @@
     virtualenv: "{{ virtualenv_path }}"
     requirements: "{{ requirements_file }}"
     virtualenv_python: "python3.4"
+
+- name: Export PYTHONPATH
+  lineinfile:
+    dest: "{{ virtualenv_path }}/bin/activate"
+    line: 'export PYTHONPATH=/vagrant/:/vagrant/data_collector:/vagrant/backend_api:$PYTHONPATH'

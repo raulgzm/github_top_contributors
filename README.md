@@ -8,6 +8,8 @@
 ## Environment Installation
 
 ```
+git clone https://github.com/raulgonzm/github_top_contributors.git
+cd github_top_contributors
 vagrant up
 vagrant ssh
 workon github_top_contributors

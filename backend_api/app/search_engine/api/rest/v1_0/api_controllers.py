@@ -3,11 +3,15 @@
 # Core Flask imports
 
 # Third-Party imports
+from flask import jsonify
 from flask_restful import Resource, reqparse
 # Apps Imports
 from app.search_engine.services import SearchEngineServices
+from app.search_engine.api.rest.v1_0.api_serializers import GithubUserSerializer
 
 class SearchEngineSearchAPIController(Resource):
+
+    serializer = GithubUserSerializer
 
     def get_page_size(self):
         parser = reqparse.RequestParser()
@@ -23,12 +27,16 @@ class SearchEngineSearchAPIController(Resource):
         location = args['location'] if args['location'] else ''
         return location
 
+    def get_serializer(self, total, hits):
+        return self.serializer(total=total, hits=hits)
 
     def get(self):
         page_size = self.get_page_size()
         location = self.get_location_query()
-        SearchEngineServices.search_github_users_in_elasticsearch(
+        total, hits = SearchEngineServices.search_github_users_in_elasticsearch(
             page_size=page_size,
             location=location
         )
-        return {'hello': 'world {} - {}'.format(location, page_size)}
+        serializer = self.get_serializer(total=total, hits=hits)
+        return jsonify(serializer.data)
+

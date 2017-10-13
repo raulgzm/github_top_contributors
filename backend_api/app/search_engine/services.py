@@ -17,4 +17,4 @@ class SearchEngineServices(object):
 		 	index=elastic_search_handler.index_name, 
 		 	body={"size": page_size, "query": {"match": {"location": {"query": location, "type": "phrase"}}}}
 		 )
-		 assert False, results['hits']['hits']
+		 return results['hits']['total'], results['hits']['hits']

@@ -50,7 +50,7 @@ python server.py
 This should give you something like this:
 
 ```
- * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+ * Running on http://0.0.0.0:9000/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 126-723-095 

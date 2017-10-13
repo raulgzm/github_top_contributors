@@ -8,7 +8,7 @@ from elasticsearch import Elasticsearch
 from app.settings.config import (
 	ELASTICSEARCH_HOST, 
 	ELASTICSEARCH_PORT,
-	ELASTICSEARC_INDEX_NAME,
+	ELASTICSEARCH_INDEX_NAME,
 )
 
 
@@ -30,7 +30,7 @@ user_mapping = {
 class ElasticSearchFactory(object):
 
 	__instance = None
-	index_name = ELASTICSEARC_INDEX_NAME
+	index_name = ELASTICSEARCH_INDEX_NAME
 
 	def __new__(self):
 		if not self.__instance:

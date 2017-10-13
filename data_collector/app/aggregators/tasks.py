@@ -5,7 +5,8 @@
 # Third-Party imports
 from celery import shared_task
 # Apps Imports
+from app.aggregators.services import AggregatorServices
 
-@shared_task(name="my_background_task")
-def my_background_task():
-    return 2 + 2
+@shared_task(name="run_github_users_aggregator")
+def run_github_users_aggregator():
+    AggregatorServices.run_github_aggregator(location='barcelona')

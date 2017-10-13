@@ -6,7 +6,6 @@ from flask import Flask
 from celery import Celery
 # Apps Imports
 import settings
-from app.aggregators.tasks import my_background_task
 
 app = Flask(__name__)
 app.config.from_object(settings)

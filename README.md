@@ -20,6 +20,7 @@ workon github_top_contributors
 Open a terminal tab to run the distributed task Queue Consumer:
 
 ```
+vagrant ssh
 workon github_top_contributors
 cd /vagrant/data_collector/
 celery -A data_collector.app.celery worker -c 4 --loglevel=DEBUG --workdir /vagrant
@@ -28,6 +29,7 @@ celery -A data_collector.app.celery worker -c 4 --loglevel=DEBUG --workdir /vagr
 Open a new terminal tab to run the asynchronous task to populate ElasticSearch:
 
 ```
+vagrant ssh
 workon github_top_contributors
 cd /vagrant/data_collector/
 ipython

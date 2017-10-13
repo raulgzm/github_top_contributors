@@ -5,6 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.network "private_network", ip: "172.16.1.10"
   config.vm.network "forwarded_port", guest: 9000, host: 9000
+  config.vm.network "forwarded_port", guest: 80, host: 8500
   config.vm.synced_folder ".", "/vagrant/"
 
   config.vm.provider "virtualbox" do |v|

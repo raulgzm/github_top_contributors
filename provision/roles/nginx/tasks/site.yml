@@ -12,6 +12,13 @@
     - conf
     - sites
 
+- name: Disable the default site
+  file:
+    path: "{{nginx_conf_dir}}/sites-enabled/default"
+    state: absent
+  notify:
+    - reload nginx
+
 - name: "Site {{site}} | Set site as {{'enabled' if (state is not defined or state == 'enabled') else 'disabled'}}"
   sudo: yes
   file:

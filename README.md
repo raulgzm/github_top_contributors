@@ -29,8 +29,8 @@ Open a new terminal tab to run the asynchronous task to populate ElasticSearch:
 workon github_top_contributors
 cd /vagrant/data_collector/
 ipython
-from app import celery
-celery.send_task("run_github_users_aggregator")
+In [1]: from app import celery
+In [2]: celery.send_task("run_github_users_aggregator")
 ```
 
 ## Run Backend API Server

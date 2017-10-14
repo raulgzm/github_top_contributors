@@ -1,0 +1,4 @@
+- name: Install Supervisor
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
+  with_items:
+    - supervisor

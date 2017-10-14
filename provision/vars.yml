@@ -17,3 +17,11 @@ requirements_file: "{{ root_path }}/requirements/devel.txt"
 
 #ElasticSearch
 es_instance_name: "github_top_contributors_db"
+
+# Gunicorn settings.
+gunicorn_user: vagrant
+gunicorn_group: vagrant
+gunicorn_port: 9000
+gunicorn_num_workers: 2
+
+backend_api_dir: "{{ project_path }}/backend_api/"

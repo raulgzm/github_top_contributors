@@ -1,0 +1,48 @@
+- name: Ensure gunicorn
+  pip: virtualenv={{ virtualenv_path }} name={{ item }}
+  with_items:
+    - gunicorn
+
+- name: Create the Gunicorn script file
+  template: src=gunicorn_start.j2
+            dest={{ virtualenv_path }}/bin/gunicorn_start
+            owner={{ gunicorn_user }}
+            group={{ gunicorn_group }}
+            mode=0755
+            backup=yes
+  tags: deploy
+
+- name: Create the application log folder
+  file: path={{ application_log_dir }}
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
+        mode=0774
+        state=directory
+
+- name: Create (or retain) the application log file
+  copy: content=""
+        dest={{ application_log_file }}
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
+        mode=0664
+        force=no
+
+- name: Create the virtualenv postactivate script to set environment variables
+  template: src=virtualenv_postactivate.j2
+            dest={{ virtualenv_path }}/bin/postactivate
+            owner={{ gunicorn_user }}
+            group={{ gunicorn_group }}
+            mode=0640
+            backup=yes
+  tags: deploy
+
+- name: Ensure the Supervisor service is running
+  service: name=supervisor state=started enabled=yes
+
+- name: Create the Supervisor config file
+  template: src=supervisor_gunicorn_conf.j2
+            dest=/etc/supervisor/conf.d/{{ application_name }}.conf
+            backup=yes
+
+- name: Re-read the Supervisor config files
+  supervisorctl: name={{ application_name }} state=present

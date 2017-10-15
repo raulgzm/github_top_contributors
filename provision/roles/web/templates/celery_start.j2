@@ -1,0 +1,9 @@
+#!/bin/sh
+SERVERDIR={{ root_path }} 
+# Activate the virtual environment.
+. {{ virtualenv_path }}/bin/activate
+cd $SERVERDIR
+# Programs meant to be run under supervisor should not daemonize themselves
+# (do not use --daemon).
+export PYTHONPATH=/vagrant/:/vagrant/data_collector:/vagrant/backend_api:$PYTHONPATH
+exec /vagrant/.virtualenvs/github_top_contributors/bin/celery -A data_collector.app.celery worker -c 4 --loglevel=DEBUG --workdir /vagrant

@@ -2,3 +2,12 @@
 
 - include: setup_virtualenv.yml
   tags: virtualenv
+
+- include: supervisor.yml
+  tags: virtualenv
+
+- include: gunicorn.yml
+  tags: virtualenv
+
+- include: celery.yml
+  tags: virtualenv

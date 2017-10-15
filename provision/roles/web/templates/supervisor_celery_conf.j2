@@ -1,0 +1,13 @@
+[program:{{ celery_application_name }}]
+
+command = /vagrant/.virtualenvs/github_top_contributors/bin/celery -A data_collector.app.celery worker -c 4 --loglevel=DEBUG --workdir /vagrant
+		
+environment = PYTHONPATH = "/vagrant/.virtualenvs/github_top_contributors/lib/python3.4/:/vagrant/:/vagrant/data_collector:/vagrant/backend_api:$PYTHONPATH"
+
+directory = /vagrant/
+
+autostart = true
+autorestart = true
+user = {{ celery_user }}
+stdout_logfile = {{ celery_log_file }}
+redirect_stderr = true

@@ -11,8 +11,9 @@ root_path: "/vagrant"
 virtualenv_root_path: "{{ root_path }}/.virtualenvs"
 virtualenv_path: "{{ virtualenv_root_path }}/{{ virtualenv_name }}"
 project_path: "{{ root_path }}/{{ project_name }}"
-application_log_dir: "{{ virtualenv_path }}/logs"
+application_log_dir: "/var/log/supervisor"
 application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"
+celery_log_file: "{{ application_log_dir }}/celery_supervisor.log"
 requirements_file: "{{ root_path }}/requirements/devel.txt"
 
 #ElasticSearch
@@ -24,4 +25,10 @@ gunicorn_group: vagrant
 gunicorn_port: 9000
 gunicorn_num_workers: 2
 
+celery_application_name: celeryd
+celery_user: vagrant
+celery_group: vagrant
+
+
 backend_api_dir: "{{ project_path }}/backend_api/"
+data_collector_dir: "{{ project_path }}/data_collector/"

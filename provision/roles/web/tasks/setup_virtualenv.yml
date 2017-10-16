@@ -10,7 +10,7 @@
     extra_args: --upgrade
 
 - name: Create the virtualenv
-  command: . /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv -a /vagrant/ -p /usr/bin/python3.4 {{ virtualenv_name }}
+  shell: . /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv -a /vagrant/ -p /usr/bin/python3.4 {{ virtualenv_name }}
            creates={{ virtualenv_path }}/bin/activate executable=/bin/bash
 
 - name: Install packages required by the app inside virtualenv
